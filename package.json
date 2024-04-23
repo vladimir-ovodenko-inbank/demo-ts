@@ -1,6 +1,7 @@
 {
   "scripts": {
     "e2e": "npx playwright test",
+    "e2e:show": "npx playwright test --headed",
     "e2e:debug": "npx playwright test --debug"
   },
   "devDependencies": {

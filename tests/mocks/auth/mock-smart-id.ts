@@ -1,4 +1,5 @@
 import {BrowserContext} from "@playwright/test";
+import {ControlCodeGenerator} from "../../helpers/test-data-generator";
 
 const defaultResponse = {
     details: {message: ["verification_failed_expired_transaction"]},
@@ -8,20 +9,20 @@ const defaultResponse = {
     statusCode: 422
 };
 
-// control code
+// control code - valid ID code
 export const mockAuthSmartIdControlCode = async (context: BrowserContext): Promise<void> => {
     await context.route('**/api/auth/smartid', (route) => {
         void route.fulfill({
             contentType: 'application/json',
             status: 200,
             body: JSON.stringify({
-                "controlCode": "7777"
+                "controlCode": ControlCodeGenerator.generateControlCodeSmartIdAuth()
             }),
         })
     })
 }
 
-// status mock
+// status mock - error state
 export const mockAuthSmartIdStatusError = async (context: BrowserContext): Promise<void> => {
     await context.route('**/api/auth/status/smartid', (route) => {
         void route.fulfill({

@@ -13,7 +13,6 @@ export class AuthPage extends BasePage {
     constructor(page: Page) {
         super(page);
         this.url = `${playwrightConfig.use.baseURL}/login`
-        // this.url = "https://partner.inbank.ee/en/login";
     }
 
     public async clickSmartIdTab(): Promise<void> {

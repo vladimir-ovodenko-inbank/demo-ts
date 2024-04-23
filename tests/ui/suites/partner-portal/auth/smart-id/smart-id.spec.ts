@@ -6,33 +6,24 @@ import {mockAuthSmartIdControlCode, mockAuthSmartIdStatusError} from "../../../.
 test.describe("login with smart id", () => {
 
   test.beforeEach( async ( { authPage, context } ) => {
-
-  })
-
-
-
-  test('check control code', async ({ authPage, context }) => {
-    await mockAuthSmartIdControlCode(context);
-    await authPage.open();
-    await authPage.clickButtonByText("Save settings");
-    await authPage.clickSmartIdTab();
-
-    await authPage.fillElement(authPage.identityCodeInput, identityCode.validCode)
-    await authPage.clickButtonByText("Log in");
-    await authPage.checkElementIsVisible(authPage.controlCodeBlock);
-  });
-
-  test.only('check error message mocked', async ({ authPage, context }) => {
     await mockAuthSmartIdControlCode(context);
     await mockAuthSmartIdStatusError(context);
     await authPage.open();
     await authPage.clickButtonByText("Save settings");
     await authPage.clickSmartIdTab();
+  })
 
+
+  test('when user insert a valid ID code and logging in then control code appeared', async ({ authPage, context }) => {
+    await authPage.fillElement(authPage.identityCodeInput, identityCode.validCode)
+    await authPage.clickButtonByText("Log in");
+    await authPage.checkElementIsVisible(authPage.controlCodeBlock);
+  });
+
+  test('when user insert a valid ID code and logging in then error message shown', async ({ authPage, context }) => {
     await authPage.fillElement(authPage.identityCodeInput, identityCode.anotherValidCode)
     await authPage.clickButtonByText("Log in");
     await authPage.checkElementIsVisible(authPage.error);
-
   });
 
 
