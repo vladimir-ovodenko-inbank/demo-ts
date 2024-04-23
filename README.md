@@ -10,8 +10,9 @@ the mock handler responds with a JSON object containing a control code.
 
 
 ## Subject for investigation 
-The mock implementation isn't ideal because it uses hardcoded responses
+*  The _mock implementation_ isn't ideal because it uses hardcoded responses
 and doesn't integrate with existing product code (importing interface). This could cause unexpected problems if the API changes.
+* How to imitate authorised user in order to bypass auth page (e.g. add data to cookie, local storage) and navigate app to a right place  
 
 ## Known issues: 
 current example using locators by text, id & css without specific data attributes which will be added soon.
